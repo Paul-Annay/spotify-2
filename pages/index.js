@@ -1,8 +1,9 @@
 import Head from "next/head";
+import Sidebar from "../components/Sidebar";
 
 export default function Home() {
     return (
-        <div>
+        <div className='bg-black h-screen overflow-hidden'>
             <Head>
                 <title>Spotify</title>
                 <meta
@@ -11,10 +12,8 @@ export default function Home() {
                 />
                 <link rel='icon' href='/favicon.png' />
             </Head>
-            <h1 className='text-green-500 font-bold'>
-                This is the starter code for Spotify
-            </h1>
             <main>
+                <Sidebar />
                 {/* Sidebar */}
                 {/* Center */}
             </main>
