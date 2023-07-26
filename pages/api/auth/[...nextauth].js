@@ -25,7 +25,6 @@ async function refreshAccessToken(token) {
 }
 
 export const authOptions = {
-    // Configure one or more authentication providers
     providers: [
         SpotifyProvider({
             clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
@@ -39,7 +38,6 @@ export const authOptions = {
     },
     callbacks: {
         async jwt({ token, account, user }) {
-            // Initial sign in
             if (account && user) {
                 return {
                     ...token,
@@ -50,14 +48,10 @@ export const authOptions = {
                 };
             }
 
-            // Return previous token if the access token has not expired yet
             if (Date.now() < token.accessTokenExpires) {
-                console.log("EXISTING ACCESS TOKEN IS VALID");
                 return token;
             }
 
-            // Access token has expired, try to update it
-            console.log("ACCESS TOKEN HAS EXPIRED, REFRESHING...");
             return await refreshAccessToken(token);
         },
 
