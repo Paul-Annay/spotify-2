@@ -36,3 +36,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Implementing Next Auth
 
 To Get started with [Next Auth](https://next-auth.js.org/getting-started/example) use the template
+
+## Implemneting the Token Refresh Logic
+
+Read [Refresh Token Rotation](https://next-auth.js.org/v3/tutorials/refresh-token-rotation)
