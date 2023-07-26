@@ -8,14 +8,22 @@ import {
     SearchIcon,
     LogoutIcon,
 } from "@heroicons/react/outline";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 function Sidebar() {
+    const { data: session } = useSession();
+    console.log(session);
     return (
         <div className='text-gray-500 text-sm p-5 border-r border-gray-900'>
             <div className='space-y-4'>
                 <button className='flex items-center space-x-2 hover:text-white'>
-                    <LogoutIcon className='h-5 w-5' onClick={() => signOut()} />
+                    <LogoutIcon
+                        className='h-5 w-5'
+                        onClick={() => {
+                            console.log("logged out");
+                            signOut();
+                        }}
+                    />
                     <p>Logout</p>
                 </button>
                 <button className='flex items-center space-x-2 hover:text-white'>
