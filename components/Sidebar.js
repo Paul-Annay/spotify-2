@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
     HeartIcon,
     HomeIcon,
@@ -6,16 +5,18 @@ import {
     PlusCircleIcon,
     RssIcon,
     SearchIcon,
-    LogoutIcon,
 } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { playlistIdState } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 
 function Sidebar() {
     const spotifyApi = useSpotify();
     const { data: session } = useSession();
     const [playlists, setPlaylists] = useState([]);
-    const [playlistId, setPlaylistId] = useState(null);
+    const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
 
     useEffect(() => {
         if (spotifyApi.getAccessToken()) {
@@ -29,18 +30,8 @@ function Sidebar() {
     console.log("playlists", playlists);
     console.log("playlist id: ", playlistId);
     return (
-        <div className='text-gray-500 text-sm p-5 border-r border-gray-900 overflow-y-scroll scrollbar-hide h-screen'>
+        <div className='text-gray-500 text-xs lg:text-sm p-5 border-r border-gray-900 overflow-y-scroll scrollbar-hide h-screen sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex'>
             <div className='space-y-4'>
-                <button className='flex items-center space-x-2 hover:text-white'>
-                    <LogoutIcon
-                        className='h-5 w-5'
-                        onClick={() => {
-                            console.log("logged out");
-                            signOut();
-                        }}
-                    />
-                    <p>Logout</p>
-                </button>
                 <button className='flex items-center space-x-2 hover:text-white'>
                     <HomeIcon className='h-5 w-5' />
                     <p>Home</p>
